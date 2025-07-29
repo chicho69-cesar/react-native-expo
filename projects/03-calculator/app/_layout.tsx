@@ -1,10 +1,17 @@
 import { useFonts } from 'expo-font'
+import * as NavigationBar from 'expo-navigation-bar'
 import { Slot } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
 import 'react-native-reanimated'
 
-import { Colors } from '@/constants/Colors'
+import { globalStyles } from '@/config/theme/global-styles'
+
+const isAndroid = Platform.OS === 'android'
+
+if (isAndroid) {
+  NavigationBar.setBackgroundColorAsync('black')
+}
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -16,7 +23,7 @@ export default function RootLayout() {
   }
 
   return (
-    <View style={{ backgroundColor: Colors.background, flex: 1 }}>
+    <View style={globalStyles.background}>
       <Slot />
       <StatusBar style="light" />
     </View>
