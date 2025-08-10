@@ -5,7 +5,7 @@ import { CastMapper } from '@/infrastructure/mappers/cats.mapper'
 
 export default async function getMovieCast(movieId: number): Promise<Cast[]> {
   try {
-    const { data } = await movieApi.get<MovieDBCreditsResponse>(`/$${movieApi}/credits`)
+    const { data } = await movieApi.get<MovieDBCreditsResponse>(`/${movieId}/credits`)
     return data.cast.map(CastMapper.fromMovieDBCastToEntity)
   } catch (error) {
     console.log('Error fetching movie cast:', error)
